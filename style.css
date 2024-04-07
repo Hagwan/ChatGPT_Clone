@@ -51,6 +51,12 @@ color: var(--icon-color);
 visibility: hidden;
 }
 
+
+.chat:hover .chat-content span {
+visibility: visible;
+}
+
+
 .chat .chat-details  {
    display: flex;
     align-items: center;
@@ -73,3 +79,30 @@ span.material-symbols-rounded{
     cursor: pointer;
 
 }
+.typing-animation {
+    display: inline-flex;
+    padding-left: 20px;
+}
+ .typing-animation .typing-dot{
+
+    height: 7px;
+    width: 7px;
+    opacity: 0.7;
+    margin: 0 3px;
+    border-radius: 50%;
+    background-color: var(--text-color);
+    animation: animateDots 1.5s ease-in-out infinite;
+ }
+    
+
+ @keyframes animateDots {
+    0%, 45% {
+        transform: translateY(0px);
+    }
+
+    25% {
+        transform: translateY(-6px);
+    }
+
+    45% {opacity: 0.2;}
+    }
