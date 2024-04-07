@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --text-color: #FFFFFF;
+    --icon-color: #b0b0be;
+    --icon-hover-bg: #5a5d6e;
+    --placeholder-color: #c3c2c2;
+    --outgoing-chat-bg: #31323c;
+    --incoming-chat-bg: #444754;
+    --outgoing-chat-border: #31323c;
+    --incoming-chat-border:#444754; 
+}
+body {
+    background-color: var(--outgoing-chat-bg);
+}
+
+
+.chat-container {
+    color: var(--text-color); 
+}
+    
+.chat .chat-content{
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+
+}
+.chat .chat-details  {
+   display: flex;
+    align-items: center;
+    } 
+
+.chat .chat-details img {
+width: 35px;
+height: 35px;
+object-fit: cover;
+border-radius: 2px;
+} 
