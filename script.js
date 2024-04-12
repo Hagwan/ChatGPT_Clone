@@ -3,7 +3,7 @@ const sendButton = document.querySelector('#send-btn');
 const chatContainer = document.querySelector('.chat-container');
 
 let userText = null;
-
+const OPENAI_API_KEY = "No longer available. Get your own API key from OpenAI.HEHE";
 const createElement = (html, className) => {
     const chatDiv = document.createElement("div");
     chatDiv.classList.add("chat", className);
