@@ -3,7 +3,7 @@ const chatInput = document.querySelector('#chat-input');
 const sendButton = document.querySelector('#send-btn');
 const chatContainer = document.querySelector('.chat-container');
 const MODEL_NAME = "gemini-1.0-pro";
-const API_KEY = "AIzaSyDtU4pXY0UIUUaS_hf4WuMFTRIi1V4XikU";
+const API_KEY = "xx";
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 let userText = null;
