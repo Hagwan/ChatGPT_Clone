@@ -14,10 +14,29 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
     />
     <script src="script.js" defer></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+
+    <script type="module" src="script.js">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+
+      const API_KEY = "AIzaSyDtU4pXY0UIUUaS_hf4WuMFTRIi1V4XikU";
+      const MODEL_NAME = "gemini-1.0-pro";
+
+      const genAI = new GoogleGenerativeAI(API_KEY);
+
+
+      const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+    </script>
   </head>
   <body>
     <div class="chat-container"></div>
-
     <div class="typing-container">
       <div class="typing-content">
         <div class="typing-textarea">

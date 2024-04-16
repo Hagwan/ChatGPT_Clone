@@ -1,9 +1,14 @@
+import { GoogleGenerativeAI } from "@google/generative-ai";
 const chatInput = document.querySelector('#chat-input');
 const sendButton = document.querySelector('#send-btn');
 const chatContainer = document.querySelector('.chat-container');
+const MODEL_NAME = "gemini-1.0-pro";
+const API_KEY = "AIzaSyDtU4pXY0UIUUaS_hf4WuMFTRIi1V4XikU";
+const genAI = new GoogleGenerativeAI(API_KEY);
 
 let userText = null;
-const OPENAI_API_KEY = "No longer available. Get your own API key from OpenAI.HEHE";
+
+
 const createElement = (html, className) => {
     const chatDiv = document.createElement("div");
     chatDiv.classList.add("chat", className);
@@ -13,42 +18,38 @@ const createElement = (html, className) => {
 
 
 
-const getChatResponse = async () => {
-    const url = "https://api.openai.com/v1/chat/completions";
 
-    const requestoptions = {
-        method: 'POST',
-        headers: {
-            "Content-Type": 'application/json',
-            "Authorization": `Bearer ${OPENAI_API_KEY}`
-        },
-        body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [
-                {
-                    role: "user",
-                    content: userText,
-                }
-            ],
-            max_tokens: 2048,
-            temperature: 0.2,
-            n: 1,
-            stop: null
+
+
+
+async function run(incomingChatDiv) {
+
+    const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+    const pElement = document.createElement("p");
+    const prompt = userText;
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    pElement.textContent = response.text();
+    incomingChatDiv.querySelector(".typing-animation").remove();
+    incomingChatDiv.querySelector(".chat-details").appendChild(pElement);
+}
+
+
+const copyResponse = (copyBtn) => {
+    // Assuming the response text is in an element with the class "response-text"
+    const responseTextElement = copyBtn.closest(".chat-details").querySelector(".response-text");
+
+    navigator.clipboard.writeText(responseTextElement.textContent)
+        .then(() => {
+            copyBtn.textContent = "done";
+            setTimeout(() => copyBtn.textContent = "content_copy", 2000);
         })
-    };
-
-
-
-    try {
-        const response = await (await fetch(url, requestoptions)).json();
-        console.log(response);
-    } catch (error) {
-        console.log(error);
-
-    }
-
-};
-
+        .catch(err => {
+            console.error("Failed to copy text: ", err);
+            // Potentially display an error message to the user
+        });
+}
 
 const showTypinAnimation = () => {
     const html = `<div class="chat-content ">
@@ -60,25 +61,27 @@ const showTypinAnimation = () => {
                   <div class="typing-dot" style="--delay: 0.4s"></div>
                 </div>
                 </div>
-                <span class="material-symbols-rounded">content_copy</span>
+            <span onclick="copyResponse(this)" class="material-symbols-rounded">content_copy</span> 
               </div>`
-    const outgoingChatDiv = createElement(html, "incoming");
-    chatContainer.appendChild(outgoingChatDiv);
-    getChatResponse();
+    const incomingChatDiv = createElement(html, "incoming");
+    chatContainer.appendChild(incomingChatDiv);
+    run(incomingChatDiv);
 }
 
 const handleOutgoingChat = () => {
     userText = chatInput.value.trim();
+    if (!userText) return;
     const html = `<div class="chat-content">
            <div class="chat-details">
             <img src="images/user.jpg" alt="User-image" />
-               <p>${userText}</p>
+               <p></p>
             </div>
         </div>`;
     const outgoingChatDiv = createElement(html, "outgoing");
+    outgoingChatDiv.querySelector("p").textContent = userText;
     chatContainer.appendChild(outgoingChatDiv);
-
     setTimeout(showTypinAnimation, 600);
 
 }
 sendButton.addEventListener("click", handleOutgoingChat);
+
