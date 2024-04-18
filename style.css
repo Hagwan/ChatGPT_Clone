@@ -36,6 +36,24 @@ body {
   padding-bottom: 150px;
   overflow-y: auto;
 }
+.default-text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 70vh;
+  padding: 0 10px;
+  text-align: center;
+  color: var(--text-color);
+
+}
+.default-text h1{
+  font-size: 3.3rem;
+}
+.default-text p {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
 
 :where(.chat-container, textarea)::-webkit-scrollbar {
   width: 6px;
@@ -167,6 +185,8 @@ span.material-symbols-rounded {
   border: none;
   resize: none;
   font-size: 1rem;
+  max-height: 250px;
+  overflow-y: auto;
   border-radius: 4px;
   color: var(--text-color);
   padding: 15px 45px 15px 20px;
@@ -205,4 +225,10 @@ span.material-symbols-rounded {
   background-color: var(--incoming-chat-bg);
   border: 1px solid var(--incoming-chat-border);
   border-radius: 4px;
+}
+
+
+
+.Gemini-Color{
+  color: #413441;
 }

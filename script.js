@@ -2,9 +2,28 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const chatInput = document.querySelector('#chat-input');
 const sendButton = document.querySelector('#send-btn');
 const chatContainer = document.querySelector('.chat-container');
+const themeButton = document.querySelector('#theme-btn');
+const deleteButton = document.querySelector('#delete-btn');
+const intialHeight = chatInput.scrollHeight;
+
 const MODEL_NAME = "gemini-1.0-pro";
-const API_KEY = "xx";
+const API_KEY = "AIzaSyDtU4pXY0UIUUaS_hf4WuMFTRIi1V4XikU";
 const genAI = new GoogleGenerativeAI(API_KEY);
+const loadDataFromLocalStorage = () => {
+
+    const theme = localStorage.getItem("theme");
+
+    const defaultText = `<div class="default-text">
+                            <h1> <span class="Gemini-Color">Gemini</span> Meets ChatGPT</h1>
+                            <p>Start a conversation with the Gemini AI model by typing in the chat box below.</p>
+                         </div>`;
+
+    chatContainer.innerHTML = localStorage.getItem("all-chats") || defaultText;
+
+
+
+}
+loadDataFromLocalStorage();
 
 let userText = null;
 
@@ -15,7 +34,6 @@ const createElement = (html, className) => {
     chatDiv.innerHTML = html;
     return chatDiv;
 }
-
 
 
 
@@ -33,6 +51,14 @@ async function run(incomingChatDiv) {
     pElement.textContent = response.text();
     incomingChatDiv.querySelector(".typing-animation").remove();
     incomingChatDiv.querySelector(".chat-details").appendChild(pElement);
+
+    localStorage.setItem("all-chats", chatContainer.innerHTML);
+
+    const copyBtn = incomingChatDiv.querySelector(".material-symbols-rounded");
+    copyBtn.addEventListener("click", () => copyResponse(copyBtn));
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+    chatInput.value = "";
+    chatInput.focus();
 }
 
 
@@ -68,9 +94,14 @@ const showTypinAnimation = () => {
     run(incomingChatDiv);
 }
 
+
+
 const handleOutgoingChat = () => {
     userText = chatInput.value.trim();
     if (!userText) return;
+    chatInput.style.height = `${intialHeight}px`;
+    chatInput.value
+
     const html = `<div class="chat-content">
            <div class="chat-details">
             <img src="images/user.jpg" alt="User-image" />
@@ -79,9 +110,51 @@ const handleOutgoingChat = () => {
         </div>`;
     const outgoingChatDiv = createElement(html, "outgoing");
     outgoingChatDiv.querySelector("p").textContent = userText;
+    document.querySelector(".default-text")?.remove();
     chatContainer.appendChild(outgoingChatDiv);
     setTimeout(showTypinAnimation, 600);
 
 }
+
+themeButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
+    document.body.classList.toggle("light-mode");
+    localStorage.setItem("theme", themeButton.textContent);
+    if (document.body.classList.contains("dark-theme")) {
+        themeButton.textContent = "dark_mode";
+
+    }
+    else {
+        themeButton.textContent = "light_mode";
+    }
+}
+);
+
+deleteButton.addEventListener("click", () => {
+    if (confirm("Are you sure you want to delete all chats?")) {
+        localStorage.clear();
+        chatContainer.innerHTML = "";
+    }
+
+});
+
+
+chatInput.addEventListener("input", () => {
+    chatInput.style.height = `${intialHeight}px`;
+    chatInput.style.height = `${chatInput.scrollHeight}px`;
+});
+
+chatInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+        e.preventDefault();
+        handleOutgoingChat();
+    }
+});
 sendButton.addEventListener("click", handleOutgoingChat);
 
+/* Helper function to get a complementary color (basic implementation) */
+function complementing(color) {
+    let [hue, saturation, lightness] = color.split(/\s*,\s*/);
+    hue = (Number(hue.slice(4, -1)) + 180) % 360;
+    return `hsl(${hue}, ${saturation}, ${lightness})`;
+}
