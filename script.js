@@ -7,14 +7,14 @@ const deleteButton = document.querySelector('#delete-btn');
 const intialHeight = chatInput.scrollHeight;
 
 const MODEL_NAME = "gemini-1.0-pro";
-const API_KEY = "AIzaSyDtU4pXY0UIUUaS_hf4WuMFTRIi1V4XikU";
+const API_KEY = "add-your-api-key-here";
 const genAI = new GoogleGenerativeAI(API_KEY);
 const loadDataFromLocalStorage = () => {
 
     const theme = localStorage.getItem("theme");
 
     const defaultText = `<div class="default-text">
-                            <h1> <span class="Gemini-Color">Gemini</span> Meets ChatGPT</h1>
+                            <h1> <span class="title" >Gemini</span> Meets <span class="title-gpt">ChatGPT</span></h1>
                             <p>Start a conversation with the Gemini AI model by typing in the chat box below.</p>
                          </div>`;
 
@@ -152,9 +152,3 @@ chatInput.addEventListener("keydown", (e) => {
 });
 sendButton.addEventListener("click", handleOutgoingChat);
 
-/* Helper function to get a complementary color (basic implementation) */
-function complementing(color) {
-    let [hue, saturation, lightness] = color.split(/\s*,\s*/);
-    hue = (Number(hue.slice(4, -1)) + 180) % 360;
-    return `hsl(${hue}, ${saturation}, ${lightness})`;
-}

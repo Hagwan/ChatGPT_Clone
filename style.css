@@ -36,7 +36,7 @@ body {
   padding-bottom: 150px;
   overflow-y: auto;
 }
-.default-text{
+.default-text {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,9 +45,8 @@ body {
   padding: 0 10px;
   text-align: center;
   color: var(--text-color);
-
 }
-.default-text h1{
+.default-text h1 {
   font-size: 3.3rem;
 }
 .default-text p {
@@ -227,8 +226,63 @@ span.material-symbols-rounded {
   border-radius: 4px;
 }
 
+.title {
+  background-image: -webkit-linear-gradient(
+    left,
+    #3498db,
+    #f47920 10%,
+    #b74662 20%,
+    #f7acbc 30%,
+    #ffd400 40%,
+    #3498db 50%,
+    #f47920 60%,
+    #993951 70%,
+    #f7acbc 80%,
+    #ffd400 90%,
+    #3498db
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-size: 200% 100%;
+  animation: slide 5s infinite linear;
+  font-size: 3.3rem;
+}
+@keyframes slide {
+  0% {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
 
-
-.Gemini-Color{
-  color: #413441;
+.title-gpt:hover {
+  background-image: -webkit-linear-gradient(
+    left,
+    #74aa9c,
+    #ffffff 10%,
+    #74aa9c 20%,
+    #ffffff 30%,
+    #74aa9c 40%,
+    #ffffff 50%,
+    #74aa9c 60%,
+    #ffffff 70%,
+    #74aa9c 80%,
+    #ffffff 90%,
+    #74aa9c
+  );
+  font-size: 3.3rem;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-size: 200% 100%;
+  animation: slide 5s infinite linear;
+  font-size: 3.3rem;
+}
+@keyframes slide {
+  0% {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
 }
