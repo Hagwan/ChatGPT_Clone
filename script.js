@@ -7,7 +7,7 @@ const deleteButton = document.querySelector('#delete-btn');
 const intialHeight = chatInput.scrollHeight;
 
 const MODEL_NAME = "gemini-1.0-pro";
-const API_KEY = "add-your-api-key-here";
+const API_KEY = "AIzaSyDtU4pXY0UIUUaS_hf4WuMFTRIi1V4XikU";
 const genAI = new GoogleGenerativeAI(API_KEY);
 const loadDataFromLocalStorage = () => {
 
@@ -80,7 +80,7 @@ const copyResponse = (copyBtn) => {
 const showTypinAnimation = () => {
     const html = `<div class="chat-content ">
             <div class="chat-details">
-                <img src="images/chatbot.jpg" alt="Bot-image" />
+                <img src="images/chatbot.png" alt="Bot-image" />
                 <div class="typing-animation">
                   <div class="typing-dot" style="--delay: 0.2s"></div>
                   <div class="typing-dot" style="--delay: 0.3s"></div>
@@ -104,7 +104,7 @@ const handleOutgoingChat = () => {
 
     const html = `<div class="chat-content">
            <div class="chat-details">
-            <img src="images/user.jpg" alt="User-image" />
+            <img src="images/user.png" alt="User-image" />
                <p></p>
             </div>
         </div>`;
