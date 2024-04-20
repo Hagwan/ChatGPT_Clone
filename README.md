@@ -1,3 +1,6 @@
+![](https://github.com/Hagwan/GeminiAI-Powered-ChatGPT-UI/blob/main/images/android-chrome-512x512.png)
+
+
 # Gemini Meets ChatGPT
 This project presents a user-friendly website interface inspired by ChatGPT, but equipped with the advanced capabilities of GeminiAI, a large language model from Google AI.
 
